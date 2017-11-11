@@ -1,4 +1,5 @@
 #!/usr/bin/python
+import os
 import time
 import uuid
 import datetime
@@ -42,12 +43,14 @@ class switch(object):
 parser = argparse.ArgumentParser(__file__, description="Fake Apache Log Generator")
 parser.add_argument("--output", "-o", dest='output_type', help="Write to a Log file, a gzip file or to STDOUT", choices=['LOG','GZ','CONSOLE'] )
 parser.add_argument("--num", "-n", dest='num_lines', help="Number of lines to generate (0 for infinite)", type=int, default=1)
+parser.add_argument("--num-users", "-u", dest='num_users', help="Number of users to generate", type=int, default=1000)
 parser.add_argument("--prefix", "-p", dest='file_prefix', help="Prefix the output file name", type=str)
 parser.add_argument("--sleep", "-s", help="Sleep this long between lines (in seconds)", default=0.0, type=float)
 
 args = parser.parse_args()
 
 log_lines = args.num_lines
+num_users = args.num_users
 file_prefix = args.file_prefix
 output_type = args.output_type
 
@@ -56,7 +59,9 @@ faker = Faker()
 timestr = time.strftime("%Y%m%d-%H%M%S")
 otime = datetime.datetime.now()
 
-outFileName = './data/access_log_'+timestr+'.log' if not file_prefix else file_prefix+'_access_log_'+timestr+'.log'
+outFileName = './data/access_log_'+timestr+'.log' if not file_prefix else file_prefix+'_access_log.log'
+if not os.path.exists(os.path.dirname(outFileName)):
+    os.makedirs(os.path.dirname(outFileName))
 
 for case in switch(output_type):
     if case('LOG'):
@@ -71,7 +76,7 @@ for case in switch(output_type):
 
 response=["200","404","500","301"]
 
-uuids = [str(uuid.uuid4()) for _ in range(5000)]
+uuids = [str(uuid.uuid4()) for _ in range(num_users)]
 
 verb=["GET","POST","DELETE","PUT"]
 
@@ -98,7 +103,7 @@ while (flag):
 
     resp = numpy.random.choice(response,p=[0.9,0.04,0.02,0.04])
     byt = int(random.gauss(5000,50))
-    f.write('%s - - [%s %s] "%s %s HTTP/1.0" %s %s "-" "userid=%s"\n' % (ip,dt,tz,vrb,uri,resp,byt,uuids[random.randint(0,4999)]))
+    f.write('%s - - [%s %s] "%s %s HTTP/1.0" %s %s "-" "userid=%s"\n' % (ip,dt,tz,vrb,uri,resp,byt,uuids[random.randint(0,num_users - 1)]))
     f.flush()
 
     log_lines = log_lines - 1
