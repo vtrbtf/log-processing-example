@@ -101,6 +101,8 @@ Um possivél downside é relacionado a como a arquitetura se comporata rodando e
 
 Os arquivos de input serão gerados no docker host em `$HOME/data` e os arquivos de output (unificados por `userid`) serão gerados em `/tmp/` no docker host
 
+> O uso de sudo na execução foi necessario pra evitar manipulação de users/grupos na box. Talvez tenha algum problema de permissão com os scripts
+
 ##### Remote install
 Instalar com somente um curl ( somente para testes )
 ```
