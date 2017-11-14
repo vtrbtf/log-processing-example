@@ -85,7 +85,17 @@ Os arquivos de input serão gerados no docker host em `$HOME/data` e os arquivos
 ##### Remote install
 Instalar com somente um curl ( somente para testes )
 ```
-bash < <(curl -s -S -L https://raw.githubusercontent.com/vtrbtf/log-processing-example/master/install.sh)
+    $ bash < <(curl -s -S -L https://raw.githubusercontent.com/vtrbtf/log-processing-example/master/install.sh)
+```
+
+###### Rebuilding 
+Para rebuildar as imagens:
+```
+    # input
+    $ cd input && sudo docker build -t accesslog-generator . && cd ..
+
+    # collect
+    $ cd collect && sudo docker build -t accesslog-collector . && cd ..
 ```
 
 
