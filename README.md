@@ -89,8 +89,7 @@ Depois da instalação de todas as dependencias, executar o script de start.
 O start.sh já esta pré configurado com uns valores default. Para alterar esses valores é só exportar as seguintes variaveis:
 ```
     $ export LOGPROCESSOR_NUM_OF_SERVERS= ... # numero de servers simulados (default: 4)
-    $ export LOGPROCESSOR_NUM_OF_USERS= ... # numero de usuarios (default: 1000)
-    $ export LOGPROCESSOR_NUM_OF_LINES_FOR_EACH_FILE= ... # numero de linhas por arquivo de log (default: 1000)
+    $ export LOGPROCESSOR_NUM_OF_LINES_FOR_EACH_FILE= ... # numero de linhas por arquivo de log (default: 100000)
 ```
 
 #### Docker
