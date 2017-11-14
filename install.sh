@@ -6,7 +6,7 @@ then
     curl -fsSL get.docker.com -o get-docker.sh && sh get-docker.sh
 fi
 
-sudo apt-get install -y unzip curl
+sudo apt-get install unzip -y
 
 rm -rf log-processor/ master.zip
 wget https://github.com/vtrbtf/log-processing-example/archive/master.zip 
