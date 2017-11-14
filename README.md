@@ -74,6 +74,25 @@ Para iniciar o CLI ( depois de ter feito o build ):
 
 ## Environments
 
+#### Scripts
+Os scripts automatizam toda a configuração necessaria para a execução dos projetos. 
+
+##### Usage
+Como esperado, em uma box limpa executar o [remote install](#remote-install).  
+Depois da instalação de todas as dependencias, executar o script de start.  
+
+```
+    $ chmod +x start.sh
+    $ ./start.sh
+```
+
+O start.sh já esta pré configurado com uns valores default. Para alterar esses valores é só exportar as seguintes variaveis:
+```
+    $ export LOGPROCESSOR_NUM_OF_SERVERS= ... # numero de servers simulados (default: 4)
+    $ export LOGPROCESSOR_NUM_OF_USERS= ... # numero de usuarios (default: 1000)
+    $ export LOGPROCESSOR_NUM_OF_LINES_FOR_EACH_FILE= ... # numero de linhas por arquivo de log (default: 1000)
+```
+
 #### Docker
 Para facilitar o isolamento da execução do projeto eu crei 2 Dockerfiles, cada um responsavel pela a execução de 1 script. As 2 imagens usadas são da [standard library](https://github.com/docker-library/official-images), portando são seguras e pequenas.
 
